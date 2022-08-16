@@ -36,7 +36,7 @@ jobs:
       - run:
           name: "Writes text to file"
           command: |
-            echo "text to output here" > output.txt
+            echo "text to output here" > ~/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
@@ -61,7 +61,9 @@ workflows:
       - print_name:
           requires:
             - print_world
-      - save_output_file
+      - save_output_file:
+          requires:
+            - print_world
       - print_output_file:
           requires:
             - save_output_file
