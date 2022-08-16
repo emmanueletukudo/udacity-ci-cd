@@ -54,6 +54,15 @@ jobs:
       - image: cimg/base:stable
     steps:
       - print_pipeline_id
+  check_failed:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: exit 1
+      - run:
+          name: on error
+          command: echo "Failed",
+          when: on_fail
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -74,3 +83,4 @@ workflows:
           requires:
             - save_output_file
       - print_pipe_id
+      - check_failed
