@@ -19,6 +19,16 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: echo world
+  print_name:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "echo my name from an env that is part of the project"
+          command: |
+            echo $MY_NAME
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -28,3 +38,6 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_name:
+          requires:
+            - print_world
