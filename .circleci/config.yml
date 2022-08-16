@@ -16,7 +16,7 @@ jobs:
       - run: echo hello
   print_world:
     docker:
-      - image: cimg/base:stable,
+      - image: cimg/base:stable
     steps:
       - run: echo world
 # Invoke jobs via workflows
